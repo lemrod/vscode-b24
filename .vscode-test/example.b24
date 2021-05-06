@@ -1,0 +1,57 @@
+#############################################################################
+#
+#                    Mask a str
+#
+#############################################################################
+#
+# Purpose:
+# To partially mask a string
+#
+# Input parameters:
+# 1. p_string       - String to be masked
+# 2. i_nb_char_left - number of characters to display on the left
+# 3. i_nb_char_righ - number of characters to display on the right
+#
+# Returns:
+#    STRING - A string partially masked
+#
+# Example:
+#    S_MASK("1234567890123456", 6, 4) => 123456******3456
+#
+##############################################################################
+STRING S_MASK( STRING p_string, NUMBER i_nb_char_left, NUMBER i_nb_char_righ );
+
+STRING str_rep;
+STRING str_new;
+STRING str_tmp;
+STRING c;
+NUMBER str_len;
+NUMBER i;
+
+str_rep = "*";
+str_new = " ";
+str_tmp = COMPRESS(p_string);
+str_len = STRLEN(str_tmp);
+
+# If number of characters to display is longer than the string, display everything
+IF (i_nb_char_left + i_nb_char_righ >= str_len) {
+	return (str_tmp);
+}
+
+# Loop through the chars of the string
+FOR (i = 0; i < str_len; 1) {
+	# if in the middle, ie between chars to display on the left
+	# and chars to display on the right, the char is replaced by *
+	IF (i > (i_nb_char_left - 1) && i < (str_len - i_nb_char_righ)) {
+		c = str_rep;
+	}
+	# Otherwise pick the char from original string
+	ELSE {
+		c = SUBSTR(str_tmp, i, 1);
+	}
+	# Append the char to the new string
+	str_new = str_new + c;
+}
+# Remove leading space from string initialisation
+str_new = substr(str_new, 1, STRLEN(str_new) - 1);
+RETURN (str_new);

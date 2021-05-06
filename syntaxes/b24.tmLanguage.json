@@ -1,0 +1,150 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "is",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#keyword"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#storage"
+		},
+		{
+			"include": "#entity"
+		},
+		{
+			"include": "#constant"
+		},
+		{
+			"include": "#function"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"match": "^\\s*#.*",
+					"name": "comment.line.b24"
+				},
+				{
+					"match": "#.*",
+					"name": "comment.inline.b24"
+				}
+			]
+		},
+		"keyword": {
+			"patterns": [
+				{
+					"name": "keyword.control.b24",
+					"match": "\\b(?i:(if|while|for|return|else|switch|case|default|break|exit))\\b"
+				},
+				{
+					"name": "keyword.operator.comparison",
+					"match": "==|<=|>=|<>|<|>"
+				},
+				{
+					"name": "keyword.operator.logical",
+					"match": "&&|\\|\\|"
+				},
+				{
+					"name": "keyword.operator.assignment",
+					"match": "=|\\+|-"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.b24",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.b24",
+					"match": "\\\\."
+				}
+			]
+		},
+		"storage": {
+			"patterns": [
+				{
+					"match": "(?i:(STRING|NUMBER|BOOLEAN|VOID))\\s+(\\w+)(?=\\s*\\()",
+					"captures": {
+						"1": {
+							"name": "storage.type"
+						},
+						"2": {
+							"name": "entity.name.function"
+						}
+					}
+				},
+				{
+					"match": "(?i:(STRING|NUMBER|BOOLEAN|VOID))\\s+(\\w+)(?!\\s*\\()",
+					"captures": {
+						"1": {
+							"name": "storage.type"
+						},
+						"2": {
+							"name": "variable"
+						}
+					}
+				}
+			]
+		},
+		"entity": {
+			"patterns": [
+				{
+					"match": "(\\w+)\\.(\\w+)(?=\\s*\\()",
+					"captures": {
+						"1": {
+							"name": "variable"
+						},
+						"2": {
+							"name": "entity.name.function"
+						}
+					}
+				},
+				{
+					"match": "(\\w+)\\.(\\w+)",
+					"captures": {
+						"1": {
+							"name": "variable.other"
+						},
+						"2": {
+							"name": "variable.property"
+						}
+					}
+				}
+			]
+		},
+		"constant": {
+			"patterns": [
+				{
+					"name": "constant.language",
+					"match": "\\b(?i:(TRUE|FALSE))\\b"
+				},
+				{
+					"name": "constant.numeric",
+					"match": "\\b(\\d+)\\b"
+				}
+			]
+		},
+		"function": {
+			"patterns": [
+				{
+					"name": "support.function",
+					"match": "\\b(?i:(EXISTS|COMPRESS|RTRIM|LTRIM|ATOI|ITOA|LOG_ERR|LOG_INFO))\\b"
+				},
+				{
+					"name": "entity.name.function",
+					"match": "\\b(\\w+)(?=\\s*\\()"
+
+				}
+			]
+		}
+	},
+	"scopeName": "source.b24"
+}

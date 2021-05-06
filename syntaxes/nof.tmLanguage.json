@@ -1,0 +1,171 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "nof",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#continuation"
+		},
+		{
+			"include": "#keyword"
+		},
+		{
+			"include": "#value"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#variable"
+		},
+		{
+			"include": "#constant"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"match": "^\\s*==.*",
+					"name": "comment.line.nof"
+				},
+				{
+					"match": "==.*",
+					"name": "comment.inline.nof"
+				}
+			]
+		},
+		"continuation": {
+			"patterns": [
+				{
+					"match": "([&])\\s*\\n",
+					"name": "constant.character.escape.single.mqsc"
+				}
+			]
+		},
+		"keyword": {
+			"patterns": [
+				{
+					"match": "\\b(?i:(ADD|ALTER|CONTROL|COPY|DELETE|EXPORT|GENERATE|IMPORT|INFO|REFRESH|RENEW|RESUME|START|STATUS|STOP|STORE|SUSPEND|VERSION))\\b\\s*\\b(\\w+)\\b\\s*\\b([a-zA-Z0-9_.-]+)",
+					"captures": {
+						"1": {
+							"name": "keyword.nof"
+						},
+						"2": {
+							"name": "entity.name.type.nof"
+						},
+						"3": {
+							"name": "constant.nof",
+							"patterns": [
+								{
+									"include": "#variable"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "\\b(?i:(OPEN))\\b\\s*(.*?)\\s*",
+					"captures": {
+						"1": {
+							"name": "keyword.nof"
+						},
+						"2": {
+							"name": "constant.nof",
+							"patterns": [
+								{
+									"include": "#variable"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"value": {
+			"patterns": [
+				{
+					"match": "\\b(\\w+)\\s+(.*?)[,\\b\\s\\n]",
+					"captures": {
+
+						"2": {
+							"name": "constant.nof",
+							"patterns": [
+								{
+									"include": "#variable"
+								},
+								{
+									"include": "#string"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"string": {
+			"patterns": [
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.nof"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.nof"
+						}
+					},
+					"name": "string.quoted.double.nof",
+					"patterns": [
+						{
+							"include": "#variable"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"end": "'",
+					"name": "invalid.illegal.nof"
+				}
+			]
+		},
+		"constant": {
+			"patterns": [
+				{
+					"name": "constant.language",
+					"match": "\\b(?i:(TRUE|FALSE|ON|OFF))\\b"
+				},
+				{
+					"name": "constant.numeric",
+					"match": "\\b(\\d+)\\b"
+				}
+			]
+		},
+		"variable": {
+			"patterns": [
+				{
+					"match": "\\$\\w+",
+					"name": "variable.other.normal.nof"
+				},
+				{
+					"match": "\\${\\w+}",
+					"name": "variable.other.bracket.nof"
+				},
+				{
+					"match": "%\\w+%",
+					"name": "variable.other.percent.nof"
+				},
+				{
+					"match": "<\\w+>",
+					"name": "variable.other.chevron.nof"
+				}
+			]
+		}
+	},
+	"scopeName": "source.nof"
+}

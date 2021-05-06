@@ -1,0 +1,49 @@
+{
+    "name": "vscode-b24",
+    "displayName": "vscode-b24",
+    "description": "Syntax highlighting for BASE24-eps Internal Scripts and ICE-XS NOF",
+    "version": "0.0.1",
+    "publisher": "lemrod",
+    "engines": {
+        "vscode": "^1.50.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "b24",
+                "aliases": [
+                    "b24"
+                ],
+                "extensions": [
+                    "b24"
+                ],
+                "configuration": "./b24.language-configuration.json"
+            },
+            {
+                "id": "nof",
+                "aliases": [
+                    "nof"
+                ],
+                "extensions": [
+                    "nof"
+                ],
+                "configuration": "./nof.language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "b24",
+                "scopeName": "source.b24",
+                "path": "./syntaxes/b24.tmLanguage.json"
+            },
+            {
+                "language": "nof",
+                "scopeName": "source.nof",
+                "path": "./syntaxes/nof.tmLanguage.json"
+            }
+        ]
+    }
+}

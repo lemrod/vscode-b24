@@ -1,0 +1,24 @@
+== This is a comment
+
+ADD APPL B24, &
+        INTERFACE              MQ, &
+        PROTOCOL               B24, &
+        RECVQMGR               QMGR1, &
+        RECVQ                  "<PRFX>.STA_1", &
+        SENDQMGR               QMGR1, &
+        SENDQ                  <PRFX>.IS
+
+ADD MSGROUTER MSGR-AMEX_1, APPL B24
+
+ADD DEVPROTOCOLGENERIC2 DP-GEN2
+ADD CONNPROFILETCPIP CP-IP, RIPADDRESS 127.0.0.1, RPORT 10000
+
+ADD STATION STA_1, &
+        DEVPROTOCOL            DP-GEN2, &
+        MSGROUTER              MSGR-AMEX_1, &
+        FMMRESPONSE            0, &
+        CONNPROFILE            CP-IP, &
+        CONTACT                OUT, &
+        ISTATUS                ACTIVE, &
+        SYMSRC                 STA_1, &
+        SYMDEST                INTFAEGN
