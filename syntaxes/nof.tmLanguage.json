@@ -41,14 +41,14 @@
 			"patterns": [
 				{
 					"match": "([&])\\s*\\n",
-					"name": "constant.character.escape.single.mqsc"
+					"name": "constant.character.escape.single.nof"
 				}
 			]
 		},
 		"keyword": {
 			"patterns": [
 				{
-					"match": "\\b(?i:(ADD|ALTER|CONTROL|COPY|DELETE|EXPORT|GENERATE|IMPORT|INFO|REFRESH|RENEW|RESUME|START|STATUS|STOP|STORE|SUSPEND|VERSION))\\b\\s*\\b(\\w+)\\b\\s*\\b([a-zA-Z0-9_.-]+)",
+					"match": "\\b(?i:(ADD|ALTER|CONTROL|COPY|DELETE|EXPORT|GENERATE|IMPORT|INFO|REFRESH|RENEW|RESUME|START|STATUS|STOP|STORE|SUSPEND|VERSION))\\s+(\\w+)\\s+(.*?)[\\s,]",
 					"captures": {
 						"1": {
 							"name": "keyword.nof"
@@ -67,7 +67,7 @@
 					}
 				},
 				{
-					"match": "\\b(?i:(OPEN))\\b\\s*(.*?)\\s*",
+					"match": "\\b(?i:(OPEN))\\s+(.*?)[,\\n]",
 					"captures": {
 						"1": {
 							"name": "keyword.nof"
@@ -87,9 +87,8 @@
 		"value": {
 			"patterns": [
 				{
-					"match": "\\b(\\w+)\\s+(.*?)[,\\b\\s\\n]",
+					"match": "\\b(\\w+)\\s+(.*?)[,\\n]",
 					"captures": {
-
 						"2": {
 							"name": "constant.nof",
 							"patterns": [
